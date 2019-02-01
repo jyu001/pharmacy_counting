@@ -6,7 +6,7 @@ For each drug, find the total number of unique prescriber and the total costs, w
 # Method:
 Since the input data has been cleaned and organized, it is only needed to scan the entries and combine those with same prescriber name, and then count the unique entries and sum up the costs. To avoid duplication, I used a dictionary structure to store the data: {drug: [Count(prescriber), Sum(cost), prescriber name]}. 
 
-### A few points to notice:
+### Things to notice:
 #### 1. There are entries with comma ',' in drug names or prescriber names. For example: 
 1285720516,GEBHARDT,KATHERINE,"PANCRELIPASE 5,000",2575.02
 
