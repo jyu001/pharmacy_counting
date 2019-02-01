@@ -24,15 +24,14 @@ def pharmacy_counting():
                         if p>left and p<right: line = line[:p] + '_' + line[p+1:]
             # split line
             lst = line.split(',')
-            # store the data into dict in such structure: {drug: [Count(prescriber), Sum(cost), prescriber name]}
-            # store 'id' in dct, in case there are multiple entries of same drug under same id
             prescriber, drug, cost = (lst[1],lst[2]), lst[3], lst[4]
             # restore drug names
             drug.replace('_', ',')
             # update drug information, add up count of prescribers and total costs:
+            # the dict has such structure: {drug: [Count(prescriber), Sum(cost), prescriber name]}
             if drug not in dct: dct[drug] = [0, 0, ('','')]
             dct[drug][1] += int(float(cost))
-            # only update Count(prescriber) when id is new:
+            # only update Count(prescriber) when prescriber name is new:
             if prescriber != dct[drug][2]:
                 dct[drug][0] += 1
                 dct[drug][2] = prescriber
@@ -40,7 +39,7 @@ def pharmacy_counting():
     sorted_by_value = sorted(dct.items(), key=lambda kv: kv[1][1], reverse = True)
     # transform data into strings for output
     res = [x[0] + ',' + str(x[1][0]) + ',' + str(x[1][1]) for x in sorted_by_value]
-    # output
+    # write into output file
     with open(sys.argv[2], 'w') as outfile:
         outfile.write('drug_name,num_prescriber,total_cost\n')
         outfile.write('\n'.join(res))
